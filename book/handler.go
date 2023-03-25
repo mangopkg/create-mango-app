@@ -11,21 +11,19 @@ type BookHandler struct {
 	Response    mango.Response
 	MountAt     string
 	BookService BookService
-	Methods     map[string]func(http.ResponseWriter, *http.Request)
 }
 
-func NewHandler(service BookService) {
+func NewHandler(service *BookService) {
 
 	h := BookHandler{
 		MountAt:     "/book",
-		BookService: service,
-		Methods:     make(map[string]func(http.ResponseWriter, *http.Request)),
+		BookService: *service,
 	}
 
 	f := reflect.TypeOf(&h)
 	v := reflect.ValueOf(&h)
 
-	h.BookService.SetupHandler(h.MountAt, f, v, h.Methods)
+	h.BookService.SetupHandler(h.MountAt, f, v)
 }
 
 /*

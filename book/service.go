@@ -3,15 +3,15 @@ package book
 import "github.com/mangopkg/mango"
 
 type BookService struct {
-	mango.Service
+	*mango.Service
 }
 
-func NewService(s mango.Service) {
+func NewService(s *mango.Service) {
 	nS := BookService{
 		s,
 	}
 
-	NewHandler(nS)
+	NewHandler(&nS)
 }
 
 func (s *BookService) GetBook() string {

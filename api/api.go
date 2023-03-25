@@ -13,13 +13,15 @@ import (
 func Launch() {
 	r := chi.NewRouter()
 
-	s := mango.New(mango.ServiceInit{R: r})
+	s := *mango.New(mango.ServiceInit{R: r})
 
 	s.R.Use(middleware.Logger)
 
-	initServices(s)
+	initServices(&s)
 
-	log.Println("Launching API...")
+	s.GenerateDocs()
+
+	log.Println("Serving on port 3000")
 
 	if err := http.ListenAndServe("localhost:3000", r); err != nil {
 		log.Println("ERROR LAUNCHING API: ", err)
@@ -27,6 +29,6 @@ func Launch() {
 
 }
 
-func initServices(s mango.Service) {
+func initServices(s *mango.Service) {
 	book.NewService(s)
 }
