@@ -27,11 +27,11 @@ func NewHandler(service *BookService) {
 }
 
 /*
-<@route{
+<@route/{
 "pattern": "/find",
 "func": "Find",
 "method": "GET"
-}>
+}/route>
 */
 func (h *BookHandler) Find() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
