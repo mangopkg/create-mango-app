@@ -27,7 +27,7 @@ func NewHandler(service *BookService) {
 }
 
 /*
-<@route/{
+<route/{
 "pattern": "/find",
 "func": "Find",
 "method": "GET"
